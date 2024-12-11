@@ -15,6 +15,8 @@ Dowload jetbrains mono nerd font
 ## Packages
 alacritty
 kitty
+ranger
+gimp
 firefox
 curl
 rofi
