@@ -1,0 +1,117 @@
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'preservim/nerdtree'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'github/copilot.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'ycm-core/YouCompleteMe'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin '42Paris/42header'
+
+call vundle#end()
+filetype plugin indent on
+
+
+call plug#begin()
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+
+call plug#end()
+
+" My stuff
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 noexpandtab
+set noexpandtab " Use tabs, not spaces
+set tabstop=4   " Number of spaces a tab counts for
+set shiftwidth=4 " Number of spaces for autoindenting
+let mapleader = "\\"
+set number
+set mouse=a
+set relativenumber 
+syntax enable
+set title
+set encoding=utf-8
+colorscheme catppuccin-mocha
+set hlsearch
+set incsearch
+set scrolloff=10
+
+if &term =~ "xterm" || has("nvim")
+  " Set cursor to block in command mode
+  let &t_EI = "\e[2 q"
+
+  " Set cursor to a vertical line in insert and other modes
+  let &t_SI = "\e[6 q"
+  let &t_SR = "\e[6 q"
+endif
+
+
+"My remaps
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>Q :wq<CR>
+nnoremap <F3> :set nu!<CR>
+map <space> /
+map <C-space> ?
+map <silent> <leader><cr> :noh<CR>
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+nnoremap <F5> :Copilot disable<CR>
+nnoremap <C-R> :redo<CR>
+vnoremap <A-Up> :m '<-2<CR>gv=gv
+vnoremap <A-Down> :m '>+1<CR>gv=gv
+nnoremap <leader>y "+y
+nnoremap <leader>Y "+Y
+vnoremap <leader>Y "+Y
+
+"Search
+
+map <space> /
+map <C-space> ?
+map <silent> <leader><cr> :noh<cr>
+
+"Window navigation
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" FZF VIM "
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>l :Lines<CR>
+nnoremap <leader>h :History<CR>
+nnoremap <leader>: :History:<CR>
+nnoremap <leader>t :Tags<CR>
+nnoremap <leader>g :GFiles<CR>
+nnoremap <leader>gs :GFiles?<CR>
+nnoremap <leader>rg :Rg<CR>
+nnoremap <leader>c :Commands<CR>
+nnoremap <leader>m :Maps<CR>
+nnoremap <leader>bt :BTags<CR>
+nnoremap <leader>x :Fzf<CR>
+nnoremap <leader>ht :Helptags<CR>
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+command! -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
+
+"NERDTree
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" YCM
+set completeopt-=preview
+
+"42 Header
+let g:user42 = 'marcsilv'
+let g:mail42 = 'marcsilv@student.42.fr'
